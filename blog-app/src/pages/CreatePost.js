@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import DeletePost from '../components/DeletePost';
-import EditPost from '../components/EditPost'; // Import EditPost
+import EditPost from '../components/EditPost';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('');
@@ -11,8 +11,9 @@ const CreatePost = () => {
   const [preview, setPreview] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [posts, setPosts] = useState([]);
-  const [showEditModal, setShowEditModal] = useState(false); // For Edit Modal
-  const [selectedPost, setSelectedPost] = useState(null); // Post to edit
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [openDropdownId, setOpenDropdownId] = useState(null);
 
   const fileInputRef = useRef(null);
   const token = localStorage.getItem('token');
@@ -25,56 +26,61 @@ const CreatePost = () => {
     fetchPosts();
   }, []);
 
-  const fetchPosts = () => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/posts/user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setPosts(data.data);
-        } else {
-          toast.error('Failed to load posts');
-        }
-      })
-      .catch((err) => {
-        toast.error('Error fetching posts');
-        console.error(err);
+  const fetchPosts = async () => {
+    if (!token) return;
+
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/posts/user`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
+      const data = await res.json();
+      if (data.success) {
+        setPosts(data.data);
+      } else {
+        toast.error('Failed to load posts');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Error fetching posts');
+    }
   };
 
-  const handleSubmit = (e) => {
+  const resetForm = () => {
+    setTitle('');
+    setContent('');
+    setImage(null);
+    setPreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = null;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!token) return toast.error('Unauthorized');
 
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
     formData.append('image', image);
 
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/posts`, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          toast.success('Post created successfully!');
-          setTitle('');
-          setContent('');
-          setImage(null);
-          setPreview(null);
-          fileInputRef.current.value = null;
-          fetchPosts();
-        } else {
-          toast.error('Failed to create post');
-        }
-      })
-      .catch((err) => alert('Error: ' + err));
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/posts`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        toast.success('Post created successfully!');
+        resetForm();
+        fetchPosts();
+      } else {
+        toast.error(data.message || 'Failed to create post');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Something went wrong.');
+    }
   };
 
   const openEditModal = (post) => {
@@ -82,11 +88,14 @@ const CreatePost = () => {
     setShowEditModal(true);
   };
 
+  const toggleDropdown = (id) => {
+    setOpenDropdownId((prevId) => (prevId === id ? null : id));
+  };
+
   return (
     <>
       <Container style={{ padding: '50px' }}>
         <Row>
-          {/* Sidebar: Post Form */}
           <Col md={4}>
             <h3>Create a Post</h3>
             <Form onSubmit={handleSubmit}>
@@ -121,11 +130,7 @@ const CreatePost = () => {
                   onChange={(e) => {
                     const file = e.target.files[0];
                     setImage(file);
-                    if (file) {
-                      setPreview(URL.createObjectURL(file));
-                    } else {
-                      setPreview(null);
-                    }
+                    setPreview(file ? URL.createObjectURL(file) : null);
                   }}
                   accept="image/*"
                   required
@@ -153,13 +158,12 @@ const CreatePost = () => {
             </Form>
           </Col>
 
-          {/* Main Feed: Posts */}
           <Col md={8}>
             <h3>Your Posts</h3>
             {posts.length === 0 ? (
               <p>No Posts Yet.</p>
             ) : (
-              [...posts]
+              posts
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                 .map((post) => (
                   <div
@@ -188,18 +192,18 @@ const CreatePost = () => {
                         </div>
                       </div>
 
-                      {/* Triple dot menu aligned to the right */}
                       <div className="custom-dropdown">
                         <button
                           className="custom-dropdown-toggle"
-                          onClick={() =>
-                            document.getElementById(`menu-${post._id}`).classList.toggle('show')
-                          }
+                          onClick={() => toggleDropdown(post._id)}
                         >
                           <span>⋯</span>
                         </button>
 
-                        <div id={`menu-${post._id}`} className="custom-dropdown-menu">
+                        <div
+                          id={`menu-${post._id}`}
+                          className={`custom-dropdown-menu${openDropdownId === post._id ? ' show' : ''}`}
+                        >
                           <div onClick={() => openEditModal(post)} className="dropdown-item">
                             Edit
                           </div>
@@ -229,7 +233,7 @@ const CreatePost = () => {
       </Container>
 
       {/* Edit Modal */}
-      {selectedPost && (
+      {showEditModal && selectedPost && (
         <EditPost
           show={showEditModal}
           handleClose={() => setShowEditModal(false)}

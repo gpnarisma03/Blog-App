@@ -72,74 +72,105 @@ function retrieveUserDetails(token) {
   }, [username, password]);
 
 
-  return (
-    user.id !== null ? 
-      <Navigate to="/blogs" /> :
-      <Container className="d-flex justify-content-center align-items-center min-vh-100">
-        <Row className="w-100 justify-content-center">
-          <Col md={6} lg={4}>
-            <Card className="p-4 shadow-lg">
-              <h1 className="text-center mb-4">Login</h1>
-              <Form onSubmit={authenticate}>
-                    <Form.Group className="mb-3">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control 
-                        type="text" 
-                        placeholder="Enter username" 
-                        required
-                        value={username}  // Update this to use the username state
-                        onChange={(e) => setUsername(e.target.value)}  // Update this to handle username input
-                    />
-                    </Form.Group>
+return (
+  user.id !== null ? 
+    <Navigate to="/blogs" /> :
+    <Container className="d-flex justify-content-center align-items-center min-vh-100" style={{ backgroundColor: "#f8f9fa" }}>
+      <Row className="w-100 justify-content-center">
+        <Col md={6} lg={4}>
+          <Card className="p-4 shadow-lg" style={{ border: 'none', borderRadius: '1rem', fontFamily: 'Lora, serif' }}>
+            <h1 className="text-center mb-4" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Login</h1>
+            <Form onSubmit={authenticate}>
+              <Form.Group className="mb-3">
+                <Form.Label style={{ color: 'var(--text-color1)' }}>Username</Form.Label>
+                <Form.Control 
+                  type="text" 
+                  placeholder="Enter username" 
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  style={{ fontFamily: 'Lora, serif' }}
+                />
+              </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control 
-                    type="password" 
-                    placeholder="Password" 
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label style={{ color: 'var(--text-color1)' }}>Password</Form.Label>
+                <Form.Control 
+                  type="password" 
+                  placeholder="Password" 
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  style={{ fontFamily: 'Lora, serif' }}
+                />
+              </Form.Group>
 
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  { 
-                    isActive ? 
-                      <Button variant="primary" type="submit" block="true">
-                        Login
-                      </Button>
-                    : 
-                      <Button variant="danger" type="submit" block="true" disabled>
-                        Login
-                      </Button>
-                  }
-
-                  <Button 
-                    variant="outline-secondary" 
-                    onClick={() => toast.info('Reset password functionality coming soon!')}
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                  <Button
+                    type="submit"
+                    disabled={!isActive}
+                    className="flex-grow-1 me-2"
+                    style={{
+                      backgroundColor: isActive ? 'var(--primary-color)' : 'white',
+                      borderColor: 'var(--primary-color)',
+                      color: isActive ? 'white' : 'var(--primary-color)',
+                      fontFamily: 'Lora, serif',
+                      cursor: isActive ? 'pointer' : 'not-allowed'
+                    }}
                   >
-                    Forgot Password?
+                    Login
                   </Button>
-                </div>
-
-                <hr />
 
                 <Button 
-                  variant="outline-danger" 
-                  className="w-100 mb-3" 
-                  onClick={() => toast.info('Google login coming soon!')}
+                  variant="outline-secondary" 
+                  onClick={() => toast.info('Reset password functionality coming soon!')}
+                  style={{ fontFamily: 'Lora, serif' }}
                 >
-                  Sign in with Google
+                  Forgot Password?
+                </Button>
+              </div>
+
+              <hr />
+
+                <Button
+                  variant="outline-primary"
+                  className="w-100 mb-3 d-flex align-items-center justify-content-center"
+                  onClick={() => toast.info('Google login coming soon!')}
+                  style={{
+                    fontFamily: 'Lora, serif',
+                    borderColor: 'var(--primary-color)',
+                    color: 'var(--primary-color)',
+                    backgroundColor: 'white',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = 'var(--primary-color)';
+                    e.target.style.borderColor = 'var(--primary-color)';
+                    e.target.style.color = 'white';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'white';
+                    e.target.style.borderColor = 'var(--primary-color)';
+                    e.target.style.color = 'var(--primary-color)';
+                  }}
+                >
+                  <img
+                    src="/google-icon.png" // Local image path from the public folder
+                    alt="Google Logo"
+                    style={{ width: '20px', marginRight: '10px' }}
+                  />
+                                  Sign in with Google
                 </Button>
 
-                <p className="text-center">
-                  Don't have an account? <Link to="/register">Sign up</Link>
-                </p>
-              </Form>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-  );
+
+              <p className="text-center" style={{ color: 'var(--text-color2)', fontFamily: 'Lora, serif' }}>
+                Don't have an account? <Link to="/register">Sign up</Link>
+              </p>
+            </Form>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+);
+
 }

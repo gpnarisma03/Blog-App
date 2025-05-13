@@ -205,15 +205,20 @@ const BlogView = () => {
                                     })}
                                   </span>
                                 </div>
-                                {(user?.id === comment.userId?._id || user?.isAdmin) && (
-                                  <button
-                                    className="btn btn-danger btn-sm"
-                                    onClick={() => handleDeleteComment(comment._id)}
-                                  >
-                                    Delete
-                                  </button>
-                                )}
-
+                                      {(user?.id === comment.userId?._id || user?.isAdmin) && (
+                                        <span className='text-muted'
+                                          onClick={() => handleDeleteComment(comment._id)}
+                                          style={{
+                                            color: 'red',
+                                            cursor: 'pointer',
+                                            fontSize: '0.9rem',
+                                            marginLeft: '10px',
+                                            textDecoration: 'underline'
+                                          }}
+                                        >
+                                          Delete
+                                        </span>
+                                      )}
                               </div>
                               <p>{comment.content}</p>
                             </div>

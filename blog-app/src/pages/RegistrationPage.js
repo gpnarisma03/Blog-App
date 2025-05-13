@@ -74,87 +74,108 @@ const RegistrationPage = () => {
     });
   }
 
-  return (
-    <Container className="mt-5">
-      <Row className="justify-content-center">
-        <Col md={6}>
-          <Card>
-            <Card.Header className="text-center">
-              <h3>Register</h3>
-            </Card.Header>
-            <Card.Body>
-              <Form onSubmit={registerUser}>
-                {/* Username */}
-                <Form.Group controlId="formUsername" className="mb-3">
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </Form.Group>
+return (
+  <Container className="mt-5">
+    <Row className="justify-content-center">
+      <Col md={6}>
+        <Card>
+          <Card.Header className="text-center">
+            <h3>Register</h3>
+          </Card.Header>
+          <Card.Body>
+            <Form onSubmit={registerUser}>
+              {/* Username */}
+              <Form.Group controlId="formUsername" className="mb-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Group>
 
-                {/* Email */}
-                <Form.Group controlId="formEmail" className="mb-3">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </Form.Group>
+              {/* Email */}
+              <Form.Group controlId="formEmail" className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
 
-                {/* Password */}
-                <Form.Group controlId="formPassword" className="mb-3">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </Form.Group>
+              {/* Password */}
+              <Form.Group controlId="formPassword" className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
 
-                {/* Confirm Password */}
-                <Form.Group controlId="formConfirmPassword" className="mb-3">
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Confirm password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                </Form.Group>
+              {/* Confirm Password */}
+              <Form.Group controlId="formConfirmPassword" className="mb-3">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </Form.Group>
 
-                {/* Submit Button */}
-                <div className="d-grid gap-2">
-                  {isActive ? (
-                    <Button variant="success" type="submit" id="submitBtn">
-                      Submit
-                    </Button>
-                  ) : (
-                    <Button variant="danger" type="submit" id="submitBtn" disabled>
-                      Submit
-                    </Button>
-                  )}
-                </div>
-              </Form>
-
-              {/* "Already Have an Account?" section */}
-              <div className="mt-3 text-center">
-                <p>
-                  Already have an account?{' '}
-                  <Link to="/login" className="btn btn-link">Click here to login</Link>
-                </p>
+              {/* Submit Button */}
+              <div className="d-grid gap-2">
+                <Button
+                  variant={isActive ? 'success' : 'outline-primary'}
+                  type="submit"
+                  id="submitBtn"
+                  style={{
+                    backgroundColor: isActive ? 'var(--primary-color)' : 'white',
+                    borderColor: 'var(--primary-color)',
+                    color: isActive ? 'white' : 'var(--primary-color)',
+                    fontFamily: 'Lora, serif',
+                    cursor: isActive ? 'pointer' : 'not-allowed',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.target.style.backgroundColor = 'white';
+                      e.target.style.borderColor = 'var(--primary-color)';
+                      e.target.style.color = 'var(--primary-color)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.target.style.backgroundColor = 'white';
+                      e.target.style.borderColor = 'var(--primary-color)';
+                      e.target.style.color = 'var(--primary-color)';
+                    }
+                  }}
+                  disabled={!isActive}
+                >
+                  Submit
+                </Button>
               </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
-  );
+            </Form>
+
+            {/* "Already Have an Account?" section */}
+            <div className="mt-3 text-center">
+              <p>
+                Already have an account?{' '}
+                <Link to="/login" className="btn btn-link">Click here to login</Link>
+              </p>
+            </div>
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+  </Container>
+);
+
 };
 
 export default RegistrationPage;

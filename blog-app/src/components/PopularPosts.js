@@ -5,10 +5,17 @@ function PopularPosts() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/posts`)
-      .then((res) => res.json())
-      .then((data) => setPosts(data.blogPosts || []))
-      .catch((err) => console.error('Error fetching posts:', err));
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/posts`);
+        const data = await res.json();
+        setPosts(data.blogPosts || []);
+      } catch (err) {
+        console.error('Error fetching posts:', err);
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   return (
@@ -20,19 +27,21 @@ function PopularPosts() {
             <li key={post._id} className="post-list">
               <Link to={`/posts/${post._id}`}>
                 <img
-                  src={`${post.imageUrl}`}
-                  alt="Image placeholder"
+                  src={post.imageUrl}
+                  alt={post.title || 'Post thumbnail'}
                   className="side-box-image"
                 />
                 <div className="text">
                   <h4>{post.title}</h4>
                   <div className="post-meta">
                     <span>
-                      {new Date(post.createdAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: '2-digit',
-                      })}
+                      {post.createdAt
+                        ? new Date(post.createdAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: '2-digit',
+                          })
+                        : 'Unknown date'}
                     </span>
                   </div>
                 </div>
