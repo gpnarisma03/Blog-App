@@ -1,0 +1,602 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+
+:root {
+
+   --primary-color: #214252;
+   --secondary-color: #2c586e;
+
+   --text-color1: rgb(90, 90, 90);
+   --text-color2: rgb(138, 138, 138);
+
+}
+
+body {
+  font-family: 'Lora', serif;
+}
+
+
+.site-nav {
+  background-color: var(--primary-color);
+}
+
+.logo {
+  font-size: 24px;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+}
+
+
+.section .container h1 {
+  color: var(--text-color1);
+}
+
+
+
+.create-post-btn, .signup-btn {
+  background-color: var(--primary-color);
+  padding: 15px;
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.posts-entry-title  {
+  color: var(--text-color1);
+}
+.create-post-btn {
+  background-color: var(--primary-color);
+  padding: 15px;
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.create-post-btn:hover, .signup-btn:hover {
+  background-color: var(--secondary-color); 
+  transform: scale(1.05); 
+}
+
+.login-btn {
+  background-color: white;
+  padding: 10px  20px;
+  margin-top: 20px;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  border-radius: 5px;
+  border: 1px solid var(--primary-color);
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.signup-btn {
+  background-color: var(--primary-color);
+  padding: 10px  20px;
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 1px solid var(--primary-color);
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.login-btn:hover {
+  background-color: var(--primary-color); /* Change background color on hover */
+  color: white; /* Change text color on hover */
+  border: 1px solid var(--primary-color); 
+  transform: scale(1.05); 
+}
+
+.blog-entry-trending {
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 16px;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 24px;
+  height: 100%; /* Allow full stretch if using flex/grid */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blog-entry-trending:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.trending-image-container {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-img {
+  width: 100%;
+  height: 100%;
+  object-fit:fill;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+
+#posts-entry a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: all 0.3 ease;
+}
+#posts-entry a:hover {
+  color: var(--secondary-color);
+}
+
+#posts-entry .read-more-btn {
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-radius: 5px;
+  padding: 8px 15px;
+  border: 1px solid var(--primary-color);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+#posts-entry .read-more-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color); 
+  transform: scale(1.05); 
+}
+
+#posts-entry .continue-reading-btn, .view-all {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+   text-underline-offset: 5px; 
+
+}
+
+#posts-entry .view-all {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+   text-underline-offset: 5px; 
+
+}
+
+#blog-section .image-container {
+  height: 200px;
+  overflow: hidden; 
+}
+
+#blog-section .custom-image {
+  width: 100%; /* Makes the image fill the container width */
+  height: 100%; /* Ensures the image height also fills the container */
+  object-fit:cover; 
+  border-radius: 5px;
+}
+
+
+.side-box-image {
+  width: 80px;   /* or any fixed size or percentage */
+  height: 80px;
+  object-fit: cover; /* maintains aspect ratio and crops if needed */
+  border-radius: 4px; /* optional for rounded corners */
+}
+.post-entry-sidebar ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.post-list {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+  margin-bottom: 10px; 
+
+}
+
+.post-list .text {
+  flex: 1;
+}
+
+.post-list a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  gap: 10px;
+
+}
+
+.post-list h4 {
+  font-weight: 400;
+  color: var(--secondary-color);
+  font-size: 19px;
+}
+
+.post-list span {
+  color: var(--text-color2);
+  font-size: 14px;
+}
+
+a.read-more-btn {
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-radius: 5px;
+  padding: 8px 15px;
+  border: 1px solid var(--primary-color);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+a.read-more-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color); 
+  transform: scale(1.05); 
+}
+.post-title {
+  color: var(--primary-color);
+}
+.author-name {
+  font-size: 18px;
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+.blog-entry {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.blog-entry:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.img-link {
+  flex-shrink: 0;
+  display: block;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.blog-entry .date {
+  font-size: 0.9rem;
+  color: #888;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.blog-entry h2 {
+  font-size: 1.25rem;
+  margin: 0 0 8px;
+  color: var(--primary-color);
+}
+
+.blog-entry h2 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.blog-entry h2 a:hover {
+  color: var(--secondary-color);
+}
+
+.blog-entry p {
+  margin: 0 0 10px;
+  color: #747373;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.read-more-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-radius: 5px;
+  padding: 6px 14px;
+  border: 1px solid var(--primary-color);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+
+.hero {
+  background-color: var(--primary-color);
+}
+
+.sidebar-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  max-width: 300px;
+
+}
+
+
+.sidebar-box .heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li a {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  color: var(--text-color2);
+  background-color: #E9F5FF;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tags li a:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+
+
+
+.comment-list {
+  padding: 0;
+  margin: 0;
+}
+
+.comment-list .comment {
+  width: 100%;
+}
+
+.vcard {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  width: 100%;
+  padding: 15px;
+}
+
+.comment-body {
+  flex: 1;
+}
+
+.comment-body h3 {
+  color: var(--primary-color);
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.comment-body .meta {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #6c757d;
+}
+
+.comment-body .comment-content {
+  font-size: 16px;
+  color: var(--text-color1);
+  margin: 0;
+}
+
+
+.comment-count  {
+  color: var(--primary-color);
+  font-size: 22px;
+}
+
+.comment-form-wrap h3 {
+  color: var(--primary-color);
+  font-size: 20px;
+}
+
+.comment-form-wrap .comment-btn {
+  color: white;
+  font-size: 14px;
+  background-color: var(--primary-color);
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+/* Custom Dropdown Container */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Styling for the Ellipsis Button */
+.custom-dropdown-toggle {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 2.5rem; /* Increase the size for better visibility */
+  cursor: pointer;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.3s ease; /* Optional: smooth effect for hover */
+  color: var(--secondary-color);
+}
+
+/* Hover effect on the ellipsis button */
+.custom-dropdown-toggle:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Styling for the Dropdown Menu */
+.custom-dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 120px;
+  padding: 10px;
+  color: var(--secondary-color);
+  
+}
+
+/* Display the dropdown menu when toggled */
+.custom-dropdown-menu.show {
+  display: block;
+}
+
+/* Styling for each Dropdown Item */
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #333;
+  transition: background-color 0.2s ease; /* Smooth transition for hover */
+
+}
+
+/* Hover effect on dropdown items */
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+
+.site-footer {
+   background-color: var(--primary-color);
+   padding: 40px 0;
+   color: #fff;
+}
+
+.site-footer .widget {
+   margin-bottom: 30px;
+}
+
+.site-footer h3 {
+   font-size: 1.25rem;
+   font-weight: bold;
+   color: #fff;
+}
+
+.site-footer p {
+   font-size: 1rem;
+   color: var(--text-color2);
+}
+
+.site-footer .social a {
+   color: #fff;
+   margin-right: 15px;
+   font-size: 20px;
+}
+
+.site-footer .social a:hover {
+   color: var(--secondary-color);
+}
+
+.site-footer .links a {
+   color: var(--text-color1);
+   font-size: 0.9rem;
+   text-decoration: none;
+   display: block;
+   margin-bottom: 10px;
+}
+
+.site-footer .links a:hover {
+   color: var(--secondary-color);
+}
+
+.post-entry-footer ul {
+   list-style: none;
+   padding: 0;
+}
+
+.post-entry-footer ul li {
+   display: flex;
+   margin-bottom: 20px;
+}
+
+.post-entry-footer ul li a {
+   display: flex;
+   align-items: center;
+   text-decoration: none;
+}
+
+.post-entry-footer ul li img {
+   width: 60px;
+   height: 60px;
+   object-fit: cover;
+   border-radius: 5px;
+   margin-right: 15px;
+}
+
+.post-entry-footer .text h4 {
+   color: #fff;
+   font-size: 1rem;
+   margin-bottom: 5px;
+}
+
+.post-entry-footer .post-meta {
+   font-size: 0.875rem;
+   color: var(--text-color2);
+}
+
+.site-footer .text-center p {
+   color: var(--text-color2);
+   font-size: 0.875rem;
+}
+
+.site-footer .text-center a {
+   color: #fff;
+   font-weight: bold;
+}
+
+.site-footer .text-center a:hover {
+   color: var(--secondary-color);
+}
