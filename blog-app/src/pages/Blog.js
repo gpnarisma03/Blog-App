@@ -180,7 +180,11 @@ function Blog({ onDataReady }) {
                     </span>
                     <h2><Link to={`/posts/${post._id}`}>{post.title}</Link></h2>
                     <p>{post.content.slice(0, 100)}...</p>
-                    <p><Link to={`/posts/${post._id}`} className="read-more-btn">Read More</Link></p>
+                      <p className="text-muted" style={{ fontSize: '14px' }}>
+                        💬 {post.comments?.length || 0} {post.comments?.length === 1 ? 'Comment' : 'Comments'}
+                      </p>
+
+                        <p><Link to={`/posts/${post._id}`} className="read-more-btn">Read More</Link></p>
                   </div>
 
                   {(user && (user.isAdmin || user.username === post.author.username)) && (
