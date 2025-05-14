@@ -12,8 +12,6 @@ const BlogView = () => {
   const [post, setPost] = useState(null);
   const { user } = useContext(UserContext);
 
-  console.log(user);
-  // Wrap fetchPostById in useCallback
   const fetchPostById = useCallback(async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/posts/${id}`);
