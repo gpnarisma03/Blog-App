@@ -37,12 +37,6 @@ A full-stack blog application with secure user login, rich blog post creation, a
 
 ---
 
-## 📸 Screenshots
-
-> *(Optional)* Add screenshots here to show the interface, such as the blog feed, post editor, or comment section.
-
----
-
 ## ⚙️ Getting Started
 
 ### 1. Clone the Repository
